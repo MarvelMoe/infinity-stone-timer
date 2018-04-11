@@ -2,29 +2,44 @@ class Timer extends React.Component {
 
 	constructor() {
 		super();
-		this.state = {
-			timeElapsed: 0
-		};
+		this.state = { timeElapsed: 0 }; // start at 0:00
 	}
 
 	componentDidMount() {
-		this.interval = setInterval(this.elapseTime.bind(this), 1000);
-		this.setState({ start: new Date() });
+		this.timer = setInterval(this.elapsedTime.bind(this), 1000);
+		this.setState({ startTime: new Date() });
 	}
 
 	componentWillUnmount() {
-		clearInterval(this.interval);
+		clearInterval(this.timer);
 	}
 
-	elapseTime() {
+	elapsedTime() {
 
-		var timeElapsed = Math.floor((new Date() - this.state.start) / 1000);
+		var timeElapsed = Math.floor((new Date() - this.state.startTime) / 1000);
 
 		this.setState({ timeElapsed: timeElapsed });
-		console.log(this);
+		console.log(this); // just in case we want to look under the hood 
+
+		if (this.state.timeElapsed == 5 * 60) {
+			document.querySelector(".time").style.opacity = '1';
+		}
+
+		if (this.state.timeElapsed == 10 * 60) {
+			document.querySelector(".mind").style.opacity = '1';
+		}
+
+		if (this.state.timeElapsed == 15 * 60) {
+			document.querySelector(".reality").style.opacity = '1';
+		}
+
+		if (this.state.timeElapsed == 20 * 60) {
+			document.querySelector(".power").style.opacity = '1';
+		}
 
 		if (this.state.timeElapsed >= this.props.workingTime * 60) {
-			clearInterval(this.interval);
+			document.querySelector(".space").style.opacity = '1';
+			clearInterval(this.timer);
 			alert("Break Time !");
 		}
 	}
@@ -52,9 +67,18 @@ class Timer extends React.Component {
 				"Time Elapsed: ",
 				this.state.timeElapsed,
 				" "
+			),
+			React.createElement(
+				"div",
+				{ className: "gem-wrapper" },
+				React.createElement("div", { className: "gem time" }),
+				React.createElement("div", { className: "gem mind" }),
+				React.createElement("div", { className: "gem reality" }),
+				React.createElement("div", { className: "gem power" }),
+				React.createElement("div", { className: "gem space" })
 			)
 		);
 	}
 }
 
-ReactDOM.render(React.createElement(Timer, { workingTime: 20 }), document.getElementById('app'));
+ReactDOM.render(React.createElement(Timer, { workingTime: 25 }), document.getElementById('app'));

@@ -2,3 +2,35 @@ body {
 	text-align: center;
 	font-family: 'Exo', sans-serif;
 }
+
+.gem { 
+  display: inline-block;
+  width: 55px;
+  height: 70px;
+  border-radius: 50%;
+  margin: 0 3px;
+  opacity: 0;
+  transition: 3s all ease-in-out;
+}
+
+.time {
+  background: #0f0;
+  background: -webkit-radial-gradient(100px 100px, circle, #0f0, #000);
+}
+
+.mind {
+  background: #bd1608;
+  background: -webkit-radial-gradient(100px 100px, circle, #bd1608, #000);
+}
+.reality {
+  background: #e23404;
+  background: -webkit-radial-gradient(100px 100px, circle, #fe9624, #000);
+}
+.power {
+  background: #a57a2d;
+  background: -webkit-radial-gradient(100px 100px, circle, #a57a2d, #000);
+}
+.space {
+  background: #00f;
+  background: -webkit-radial-gradient(100px 100px, circle, #00f, #000);
+}
