@@ -1,50 +1,83 @@
+ 
+
 class Timer extends React.Component {
 
-	constructor(){
-		super();
-		this.state = {	timeElapsed: 0  }; 	 // start at 0:00
+	constructor() {
+	  super();
+	  this.state = { time: {} , seconds: 90 };
+	  this.timer = 0;
+	  this.startTimer = this.startTimer.bind(this);
+	  this.countDown = this.countDown.bind(this);
+	}
+
+	secondsToTime(secs){
+	  let hours = Math.floor(secs / (60 * 60));
+
+	  let divisor_for_minutes = secs % (60 * 60);
+	  let minutes = Math.floor(divisor_for_minutes / 60);
+
+	  let divisor_for_seconds = divisor_for_minutes % 60;
+	  let seconds = Math.ceil(divisor_for_seconds);
+
+	  let obj = {
+	    "h": hours,
+	    "m": minutes,
+	    "s": seconds
+	  };
+	  return obj;
 	}
 
 	componentDidMount() {
-		this.timer = setInterval(this.elapsedTime.bind(this),1000)
-		this.setState({startTime: new Date()});
+	  let timeLeftVar = this.secondsToTime(this.state.seconds);
+	  this.setState({ time: timeLeftVar });
 	}
 
-	componentWillUnmount() {
-		clearInterval(this.timer);
+	startTimer() {
+	  if (this.timer == 0) {
+	    this.timer = setInterval(this.countDown, 1000);
+	  }
 	}
 
-	elapsedTime() {
-	
-		var timeElapsed = Math.floor((new Date() - this.state.startTime) / 1000);
 
-		this.setState({timeElapsed: timeElapsed});
-		 console.log(this);  // just in case we want to look under the hood 
-		 
-		if(this.state.timeElapsed == 5 * 60) {
-			document.querySelector(".time").style.opacity = '1';
-		}
+	countDown() {
+	  // Remove one second, set state so a re-render happens.
+	  let seconds = this.state.seconds - 1;
+	  this.setState({
+	    time: this.secondsToTime(seconds),
+	    seconds: seconds,
+	  });
 
-		if(this.state.timeElapsed == 10 * 60) {
-			document.querySelector(".mind").style.opacity = '1';
-		}
+	  let timeElapsed = minutes + ":" +  seconds;
 
-		if(this.state.timeElapsed == 15 * 60) {
-			document.querySelector(".reality").style.opacity = '1';
-		}
+	  this.setState({timeElapsed: timeElapsed});
+	  	 
+	  if(this.state.timeElapsed == 5 * 60) {
+	  	document.querySelector(".time").style.opacity = '1';
+	  }
 
-		if(this.state.timeElapsed ==  20 * 60) {
-			document.querySelector(".power").style.opacity = '1';
-		}
+	  if(this.state.timeElapsed == 10 * 60) {
+	  	document.querySelector(".mind").style.opacity = '1';
+	  }
 
-		if(this.state.timeElapsed >= this.props.workingTime * 60) {
-			document.querySelector(".space").style.opacity = '1';
-			clearInterval(this.timer);
-			alert("Break Time !");
-		}
+	  if(this.state.timeElapsed == 15 * 60) {
+	  	document.querySelector(".reality").style.opacity = '1';
+	  }
 
+	  if(this.state.timeElapsed ==  20 * 60) {
+	  	document.querySelector(".power").style.opacity = '1';
+	  }
+
+	  if(this.state.timeElapsed >= this.props.workingTime * 60) {
+	  	document.querySelector(".space").style.opacity = '1';
+	  	clearInterval(this.timer);
+	  	alert("Break Time !");
+	  }
+	  
+	  // Check if we're at zero.
+	  if (seconds == 0) { 
+	    clearInterval(this.timer);
+	  }
 	}
-
 
 
 
@@ -55,11 +88,12 @@ class Timer extends React.Component {
 			<div className="container">
 
 				<h1> Infinity Timer </ h1>
-				 
-				<h2>This timer runs for {this.props.workingTime} minutes </ h2>		 
-			
-				<h3>Time Elapsed: {this.state.timeElapsed} </ h3>
 
+				<button onClick={this.startTimer}>Start</button>
+				     
+				<h2>{this.state.time.m} : {this.state.time.s} </h2>  
+ 			
+				
 				 <div className="gem-wrapper">
 				 	<div className="gem time"></div>
 				    <div className="gem mind"></div>
@@ -77,6 +111,6 @@ class Timer extends React.Component {
 
 ReactDOM.render(
 
-	<Timer workingTime={25} />, 	document.getElementById('app')
+	<Timer />, 	document.getElementById('app')
 
 );
