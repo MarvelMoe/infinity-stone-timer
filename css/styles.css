@@ -2,6 +2,38 @@ body {
 	text-align: center;
 	font-family: 'Exo', sans-serif;
 }
+*:focus {
+  outline: none;
+}
+h1 {
+  text-transform: uppercase;
+}
+.btn {
+  border: 0;
+  color: #fff;
+  padding: 12px 0;
+  width: 100%;
+  max-width: 100px;
+  margin: 1px;
+  font-weight: 500;
+  transition: all ease-in-out .4s;
+}
+.btn:hover {
+  opacity: .7;
+  cursor: pointer;
+}
+.start {
+  background: #2BA0A0;
+}
+.pause {
+  background: #DAA520;
+}
+.reset {
+  background: #B2001B;
+}
+.numbers {
+  font-size: 4em
+}
 
 .gem { 
   display: inline-block;
@@ -12,7 +44,9 @@ body {
   opacity: 0;
   transition: 3s all ease-in-out;
 }
-
+.disappear {
+  display: none !important;
+}
 .time {
   background: #0f0;
   background: -webkit-radial-gradient(100px 100px, circle, #0f0, #000);

@@ -4,9 +4,11 @@ class Timer extends React.Component {
 
 	constructor() {
 		super();
-		this.state = { time: {}, seconds: 90 };
+		this.state = { time: 2500, seconds: 25 * 60, started: false };
 		this.timer = 0;
 		this.startTimer = this.startTimer.bind(this);
+		this.stopTimer = this.stopTimer.bind(this);
+		this.resetTimer = this.resetTimer.bind(this);
 		this.countDown = this.countDown.bind(this);
 	}
 
@@ -18,6 +20,7 @@ class Timer extends React.Component {
 
 		let divisor_for_seconds = divisor_for_minutes % 60;
 		let seconds = Math.ceil(divisor_for_seconds);
+		if (seconds < 10) seconds = '0' + Math.ceil(divisor_for_seconds);
 
 		let obj = {
 			"h": hours,
@@ -28,14 +31,24 @@ class Timer extends React.Component {
 	}
 
 	componentDidMount() {
-		let timeLeftVar = this.secondsToTime(this.state.seconds);
-		this.setState({ time: timeLeftVar });
+		let timeLeft = this.secondsToTime(this.state.seconds);
+		this.setState({ time: timeLeft });
 	}
 
 	startTimer() {
-		if (this.timer == 0) {
-			this.timer = setInterval(this.countDown, 1000);
-		}
+		this.timer = setInterval(this.countDown, 1000);
+		this.setState({ started: true });
+	}
+
+	stopTimer() {
+		clearInterval(this.timer);
+		this.setState({ started: false });
+	}
+
+	resetTimer() {
+		clearInterval(this.timer);
+		this.timer = setInterval(this.countDown, 1000);
+		this.setState({ seconds: 1500 + 1 });
 	}
 
 	countDown() {
@@ -46,7 +59,7 @@ class Timer extends React.Component {
 			seconds: seconds
 		});
 
-		let timeElapsed = minutes + ":" + seconds;
+		let timeElapsed = this.state.seconds;
 
 		this.setState({ timeElapsed: timeElapsed });
 
@@ -58,11 +71,11 @@ class Timer extends React.Component {
 			document.querySelector(".mind").style.opacity = '1';
 		}
 
-		if (this.state.timeElapsed == 15 * 60) {
+		if (this.state.timeElapsed == 24.9 * 60) {
 			document.querySelector(".reality").style.opacity = '1';
 		}
 
-		if (this.state.timeElapsed == 20 * 60) {
+		if (this.state.timeElapsed == 24.5 * 60) {
 			document.querySelector(".power").style.opacity = '1';
 		}
 
@@ -90,12 +103,22 @@ class Timer extends React.Component {
 			),
 			React.createElement(
 				"button",
-				{ onClick: this.startTimer },
+				{ className: "btn start", onClick: this.startTimer },
 				"Start"
 			),
 			React.createElement(
-				"h2",
-				null,
+				"button",
+				{ className: "btn pause", onClick: this.stopTimer },
+				"Pause"
+			),
+			React.createElement(
+				"button",
+				{ className: "btn reset", onClick: this.resetTimer },
+				"Reset"
+			),
+			React.createElement(
+				"p",
+				{ className: "numbers" },
 				this.state.time.m,
 				" : ",
 				this.state.time.s,
