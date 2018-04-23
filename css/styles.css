@@ -1,70 +1,155 @@
-body {
-	text-align: center;
-	font-family: 'Exo', sans-serif;
-}
 *:focus {
-  outline: none;
+     outline: none;
 }
-h1 {
-  text-transform: uppercase;
+ html, body {
+     height: 100%;
+     overflow: hidden;
 }
-.btn {
-  border: 0;
-  color: #fff;
-  padding: 12px 0;
-  width: 100%;
-  max-width: 100px;
-  margin: 1px;
-  font-weight: 500;
-  transition: all ease-in-out .4s;
+ body {
+     text-align: center;
+     font-family: 'Exo', sans-serif;
+     color: #fff;
+     background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
-.btn:hover {
-  opacity: .7;
-  cursor: pointer;
+ h1 {
+     text-transform: uppercase;
 }
-.start {
-  background: #2BA0A0;
+ .btn {
+     border: 0;
+     color: #fff;
+     padding: 12px 0;
+     width: 100%;
+     max-width: 100px;
+     margin: 1px;
+     font-weight: 500;
+     transition: all ease-in-out .4s;
 }
-.pause {
-  background: #DAA520;
+ .btn:hover {
+     opacity: .7;
+     cursor: pointer;
 }
-.reset {
-  background: #B2001B;
+ .start {
+     background: #2BA0A0;
 }
-.numbers {
-  font-size: 4em
+ .pause {
+     background: #DAA520;
 }
-
-.gem { 
-  display: inline-block;
-  width: 55px;
-  height: 70px;
-  border-radius: 50%;
-  margin: 0 3px;
-  opacity: 0;
-  transition: 3s all ease-in-out;
+ .reset {
+     background: #B2001B;
 }
-.disappear {
-  display: none !important;
+  .break {
+     background: #1ab2ff;
 }
-.time {
-  background: #0f0;
-  background: -webkit-radial-gradient(100px 100px, circle, #0f0, #000);
+ .numbers {
+     font-size: 4em;
+     margin-bottom: 2em;
 }
-
-.mind {
-  background: #bd1608;
-  background: -webkit-radial-gradient(100px 100px, circle, #bd1608, #000);
+ .gauntlet {
+     position: relative;
+     left: 50%;
+     transform: translate(-50%, -30%);
+     width: 300px;
+     height: 265px;
+     border-radius: 30px;
+     background-color: #422d26;
+     z-index: -1;
+    lor: #422d26;
+     z-index: -1;
 }
-.reality {
-  background: #e23404;
-  background: -webkit-radial-gradient(100px 100px, circle, #fe9624, #000);
+ .gauntlet .knuckle {
+     position: absolute;
+     bottom: 80%;
+     right: 0;
+     width: 75px;
+     height: 75px;
+     border-top-left-radius: 50px;
+     border-top-right-radius: 50px;
+     background-color: #422d26;
 }
-.power {
-  background: #a57a2d;
-  background: -webkit-radial-gradient(100px 100px, circle, #a57a2d, #000);
+ .gauntlet .knuckle:nth-of-type(5) {
+     right: 297px;
 }
-.space {
-  background: #00f;
-  background: -webkit-radial-gradient(100px 100px, circle, #00f, #000);
+ .gauntlet .knuckle:nth-of-type(4) {
+     right: 222px;
 }
+ .gauntlet .knuckle:nth-of-type(3) {
+     right: 147px;
+     height: 88px;
+}
+ .gauntlet .knuckle:nth-of-type(2) {
+     right: 72px;
+     height: 98px;
+}
+ .gauntlet .knuckle:nth-of-type(1) {
+     right: -3px;
+}
+ .gauntlet .knuckle.thumb {
+     transform-origin: left bottom;
+     transform: rotate(28deg);
+     bottom: 68px;
+     left: 228px;
+     z-index: -1;
+     height: 145px;
+}
+ .gauntlet .knuckle.thumb:before {
+     top: 2%;
+}
+ .gauntlet .arm {
+     position: absolute;
+     bottom: -80%;
+     left: 50%;
+     transform: translate(-50%, 0);
+     width: 246px;
+     height: 213px;
+     background-color: #422d26;
+}
+ .gem {
+     display: inline-block;
+     opacity: 0;
+     transition: 3s all ease-in-out;
+     margin: 18px;
+}
+ .gem-square {
+     height: 2.5em;
+     width: 2.25em;
+     border-radius: 2%;
+     box-shadow: inset 0 0 0 0.125em #a3721f, inset 0 0 0 0.25em transparent, inset -0.5em -0.5em 0 0 transparent, 0 0 0.0625em 0 #a3721f, 0 0.125em 0 0.25em #d7a551, 0 0.1875em 0 0.3125em #a3721f;
+}
+ .gem-oval {
+     height: 2.5em;
+     width: 2.5em;
+     border-radius: 42%;
+     box-shadow: inset 0 0 0 0.125em #a3721f, inset 0 0 0 0.25em transparent, inset -0.5em -0.5em 0 0 transparent, 0 0 0.0625em 0 #a3721f, 0 0.125em 0 0.25em #d7a551, 0 0.1875em 0 0.3125em #a3721f;
+}
+ .disappear {
+     display: none !important;
+}
+ .time {
+     background: #bd1608;
+     background: -webkit-radial-gradient(100px 100px, circle, #0f0, #000);
+}
+ .mind {
+     background: #bd1608;
+     background: -webkit-radial-gradient(100px 100px, circle, #bd1608, #000);
+}
+ .reality {
+     background: #e23404;
+     background: -webkit-radial-gradient(100px 100px, circle, #1E90FF, #00BFFF);
+}
+ .power {
+     background: #a57a2d;
+     background: -webkit-radial-gradient(100px 100px, circle, #FF69B4, #C71585);
+}
+ .space-wrapper {
+     position: relative;
+}
+ .space {
+     background: #00f;
+     background: -webkit-radial-gradient(100px 100px, circle, #FFFACD, #F0E68C);
+     position: absolute;
+     bottom: -198px;
+     left: 106px;
+     width: 80px;
+     height: 85px;
+}
+ 
